@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('Access MongoDB Connection String') {
+            steps {
+                withCredentials([string(credentialsId: 'mongo-uri', variable: 'MONGO_URI')]) {
+                    // Example command to pass the connection string to your application
+                    sh 'echo MongoDB URI: $MONGO_URI'
+                }
+            }
+        }
+    }
+}
