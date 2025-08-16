@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Starting Build...'
+                // Simulate a build process
+                sh 'exit 0' // This command simulates a successful build
+            }
+        }
+
+        stage('Test') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    echo 'Running Tests...'
+                    // Simulate a failing test
+                    sh 'exit 1' // This command simulates a test failure
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                // Simulate deployment steps
+                sh 'echo Deployment successful'
+            }
+        }
+    }
+}
